@@ -1,0 +1,189 @@
+<!--
+title: Расшифровка сбитой кодировки
+description: 
+published: true
+date: 2026-01-24T17:30:41.574Z
+tags: 
+editor: ckeditor
+dateCreated: 2026-01-24T16:59:20.115Z
+-->
+
+<h1>Как быстро расшифровать сбитую кодировку</h1>
+<p>Бывает, что в веб-браузере вместо читаемого текста показывается что-то вроде:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>â ÐÑÐ¿Ð¾Ð»Ð½Ð¸ÑÐµ Ð²ÑÐ¾Ð´ Ð¸Ð»Ð¸ Ð·Ð°ÑÐµÐ³Ð¸ÑÑÑÐ¸ÑÑÐ¹ÑÐµÑÑ</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p style="text-align:justify;">то есть совершенно нечитаемые символы.</p>
+<p style="text-align:justify;">Или так, когда английский символы показываются нормально, а вместо других символов знак процента и буквы с цифрами:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>mat2%3A%20%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B%20%D0%B4%D0%BB%D1%8F%20%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p style="text-align:justify;">Бывают строки состоящие из больших и маленьких букв с цифрами, на конце может быть один или два знака равно:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>0J/QviDQstCw0YjQtdC80YMg0L3QvtC80LXRgNGDINGN0LvQtdC60YLRgNC+0L3QvdC+0LPQviDQutC+0YjQtdC70YzQutCwwqDQt9Cw0L/Rg9GJ0LXQvdC+wqDRgNCw0YHRgdC70LXQtNC+0LLQsNC90LjQtSEg0JLQviDQuNC30LHQtdC20LDQvdC40LUg0LjRgdGH0LXQt9C90L7QstC10L3QuNGPwqDQvNCw0YLQtdGA0LjQsNC70YzQvdGL0YXCoNGB0YDQtdC00YHRgtCyLCDQv9GA0L7RgdC40LzCoNGB0YDQvtGH0L3QvsKg0LfQsNCy0LXRgNGI0LjRgtGMwqDQuNC00LXQvdGC0LjRhNC40LrQsNGG0LjRjg0KDQrQl9Cw0LLQtdGA0YjQuNGC0YzCoNCy0LXRgNC40YTQuNC60LDRhtC40Y4=</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p style="text-align:justify;">Иногда приходится сталкиваться с текстом, в котором регулярно встречается обратный слэш с иксом (<strong>\x</strong>) после которого идут буквы и цифры:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>\xE2\x80\x94\x20\xD0\x92\xD1\x8B\xD0\xBF\xD0\xBE\xD0\xBB\xD0\xBD\xD0\xB8\xD1\x82\xD0\xB5\x20\xD0\xB2\xD1\x85\xD0\xBE\xD0\xB4\x20\xD0\xB8\xD0\xBB\xD0\xB8\x20\xD0\xB7\xD0\xB0\xD1\x80\xD0\xB5\xD0\xB3\xD0\xB8\xD1\x81\xD1\x82\xD1\x80\xD0\xB8\xD1\x80\xD1\x83\xD0\xB9\xD1\x82\xD0\xB5\xD1\x81\xD1\x8C</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p style="text-align:justify;">Чтобы быстро расшифровать кодировку, даже когда вы не знаете как закодирована строка, воспользуйтесь бесплатным онлайн-сервисом по <a href="https://suip.biz/ru/?act=encoding-converter">определению и преобразованию кодировки</a>. Этот сервис скопирован отсюда <a href="http://0xcc.net/jsescape/">http://0xcc.net/jsescape/</a>.</p>
+<p style="text-align:justify;">Принцип работы очень простой — в окно вы вставляете строку в неизвестной кодировке, а сервис пытается преобразовать в каждую из&nbsp;поддерживаемых им кодировок. То есть если в поле <strong>Простой текст</strong> вы видите читаемый текст, значит ваша строка успешно расшифрована. Попробую понять смысл <strong>â ÐÑÐ¿Ð¾Ð»Ð½Ð¸ÑÐµ Ð²ÑÐ¾Ð´ Ð¸Ð»Ð¸ Ð·Ð°ÑÐµÐ³Ð¸ÑÑÑÐ¸ÑÑÐ¹ÑÐµÑÑ</strong>:</p>
+<figure class="image"><img src="https://hackware.ru/wp-content/uploads/2019/08/encoding-converter.png" alt="" srcset="https://hackware.ru/wp-content/uploads/2019/08/encoding-converter.png 424w, https://hackware.ru/wp-content/uploads/2019/08/encoding-converter-148x300.png 148w" sizes="100vw" width="424"></figure>
+<p style="text-align:justify;">Получилось! Эта строка означает:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>— Выполните вход или зарегистрируйтесь</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p style="text-align:justify;">Теперь разберёмся со строкой:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>mat2%3A%20%D0%BD%D0%BE%D0%B2%D0%B0%D1%8F%20%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D1%8F%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D1%8B%20%D0%B4%D0%BB%D1%8F%20%D1%83%D0%B4%D0%B0%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F%20%D0%BC%D0%B5%D1%82%D0%B0%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<figure class="image"><img src="https://hackware.ru/wp-content/uploads/2019/08/encoding-converter-2.png" alt="" srcset="https://hackware.ru/wp-content/uploads/2019/08/encoding-converter-2.png 414w, https://hackware.ru/wp-content/uploads/2019/08/encoding-converter-2-145x300.png 145w" sizes="100vw" width="414"></figure>
+<p style="text-align:justify;">Её значение оказалось:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>mat2: новая версия программы для удаления метаданных</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p style="text-align:justify;">А теперь посмотрим на сообщение из&nbsp;письма от мошенников:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>0J/QviDQstCw0YjQtdC80YMg0L3QvtC80LXRgNGDINGN0LvQtdC60YLRgNC+0L3QvdC+0LPQviDQutC+0YjQtdC70YzQutCwwqDQt9Cw0L/Rg9GJ0LXQvdC+wqDRgNCw0YHRgdC70LXQtNC+0LLQsNC90LjQtSEg0JLQviDQuNC30LHQtdC20LDQvdC40LUg0LjRgdGH0LXQt9C90L7QstC10L3QuNGPwqDQvNCw0YLQtdGA0LjQsNC70YzQvdGL0YXCoNGB0YDQtdC00YHRgtCyLCDQv9GA0L7RgdC40LzCoNGB0YDQvtGH0L3QvsKg0LfQsNCy0LXRgNGI0LjRgtGMwqDQuNC00LXQvdGC0LjRhNC40LrQsNGG0LjRjg0KDQrQl9Cw0LLQtdGA0YjQuNGC0YzCoNCy0LXRgNC40YTQuNC60LDRhtC40Y4=</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<figure class="image"><img src="https://hackware.ru/wp-content/uploads/2019/08/encoding-converter-3.png" alt="" srcset="https://hackware.ru/wp-content/uploads/2019/08/encoding-converter-3.png 662w, https://hackware.ru/wp-content/uploads/2019/08/encoding-converter-3-294x300.png 294w" sizes="100vw" width="662"></figure>
+<h2 style="text-align:justify;">Как определить кодировку<br>&nbsp;</h2>
+<p style="text-align:justify;">Некоторые часто встречающиеся кодировки вполне можно определить «на глаз». Определение кодировки невооружённым глазом может сильно ускорить процесс расшифровки строки или быстрее понять причину, почему текст выведен в таком виде.</p>
+<h3 style="text-align:justify;">URL кодировка<br>&nbsp;</h3>
+<p style="text-align:justify;">Начнём с кодировки, которую видел каждый — в строке браузера или на сайтах вы могли видеть примерно такие адреса: <a href="https://kali.org.ru/%d0%b4%d1%80%d1%83%d0%b3%d0%b8%d0%b5-it-%d1%82%d0%b5%d0%bc%d1%8b/%d0%ba%d0%b0%d0%ba-%d0%bd%d0%b0%d1%87%d0%b0%d1%82%d1%8c-%d0%b7%d0%bd%d0%b0%d0%ba%d0%be%d0%bc%d1%81%d1%82%d0%b2%d0%be-%d1%81-%d0%ba%d0%be%d0%bc%d0%b0%d0%bd%d0%b4%d0%b0%d0%bc%d0%b8-linux-cygwin">https://kali.org.ru/%d0%b4%d1%80%d1%83%d0%b3%d0%b8%d0%b5-it-%d1%82%d0%b5%d0%bc%d1%8b/%d0%ba%d0%b0%d0%ba-%d0%bd%d0%b0%d1%87%d0%b0%d1%82%d1%8c-%d0%b7%d0%bd%d0%b0%d0%ba%d0%be%d0%bc%d1%81%d1%82%d0%b2%d0%be-%d1%81-%d0%ba%d0%be%d0%bc%d0%b0%d0%bd%d0%b4%d0%b0%d0%bc%d0%b8-linux-cygwin</a></p>
+<p style="text-align:justify;">Стандарт URL использует набор символов US-ASCII. Это имеет серьёзный недостаток, поскольку разрешается использовать лишь латинские буквы, цифры и несколько знаков пунктуации. Все другие символы необходимо перекодировать. Например, перекодироваться должны буквы кириллицы, буквы с диакритическими знаками, лигатуры, иероглифы. Перекодирующая кодировка описана в стандарте RFC 3986 и называется URL-encoding, URLencoded или <a href="https://en.wikipedia.org/wiki/Percent-encoding">percent‐encoding</a>.</p>
+<p style="text-align:justify;">Данные из веб-форм, когда <strong>Content-Type</strong> указан как <strong>application/x-www-form-urlencoded</strong> также передаются в URL кодировке.</p>
+<h3 style="text-align:justify;">Base64<br>&nbsp;</h3>
+<p style="text-align:justify;">Я почти уверен, что вы когда-либо видели сообщения в этой кодировке — они пишутся большими и маленькими латинскими буквами, а также цифрами. На конце может быть один или два знака равно:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>0J7QtNC90LDQttC00YssINCyINGB0YLRg9C00ZHQvdGD0Y4g0LfQuNC80L3RjtGOINC/0L7RgNGDLCDRjyDQuNC3INC70LXRgdGDINCy0YvRiNC10LsuINCR0YvQuyDRgdC40LvRjNC90YvQuSDQvNC+0YDQvtC3Lg==</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p style="text-align:justify;">В любом случае, почти наверняка вы используете эту кодировку почти каждый день, даже сами того не зная, поскольку сообщения электронной почты очень часто используют Base64, особенно для писем, к котором приложены файлы (фотографии, документы и прочее).</p>
+<p><a href="https://ru.wikipedia.org/wiki/Base64">Base64</a> — стандарт кодирования двоичных данных при помощи только 64 символов ASCII. Алфавит кодирования содержит текстово-цифровые латинские символы A-Z, a-z и 0-9 (62 знака) и 2 дополнительных символа, зависящих от системы реализации. Каждые 3 исходных байта кодируются 4 символами (увеличение на ¹⁄₃).</p>
+<p style="text-align:justify;">Эта система широко используется в электронной почте для представления бинарных файлов в тексте письма (транспортное кодирование).</p>
+<p style="text-align:justify;">Указанный <a href="https://suip.biz/ru/?act=encoding-converter">сервис</a> также умеет декодировать из Base64, а также кодировать в Base64, но имеется особенность: довольно часто&nbsp;длинная строка Base64 в email разбивается на строки одинаковой длины (по причинам удобства). В сервисе, на который дана ссылка, нужно убрать лишние переводы строк, то есть вводимые данные должны быть в одну строку, иначе после первого символа «новая строка» сообщение будет декодировано неверно.</p>
+<h3 style="text-align:justify;">Кодировка UTF-8<br>&nbsp;</h3>
+<p style="text-align:justify;">Неправильно отображаемая кодировка UTF-8 выглядит как большие буквы N и D с дополнительными линиями, встречаются дроби 3/4.</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>â ÐÑÐ¿Ð¾Ð»Ð½Ð¸ÑÐµ Ð²ÑÐ¾Ð´ Ð¸Ð»Ð¸ Ð·Ð°ÑÐµÐ³Ð¸ÑÑÑÐ¸ÑÑÐ¹ÑÐµÑÑ</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<p style="text-align:justify;">В данном случае кодировка UTF-8 обработана как кодировка ISO-8859-1 или CP1258.&nbsp;С помощью указанного сервиса такие строки можно расшифровать если скопировать их в окна Quoted-printable или URL.</p>
+<p style="text-align:justify;">UTF-8 кодировка обработанная как ANSI напоминает строки из больших букв P, C, Г и маленьких букв r и s:</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td><code>РґРѕР±Р°РІРёС‚СЊ С‡С‘СЂРЅС‹Р№ СЃРїРёСЃРѕРє</code></td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<h2 style="text-align:justify;">Экранированные последовательности<br>&nbsp;</h2>
+<p style="text-align:justify;">Экранированные последовательности особенно часто можно увидеть в исходном коде программ. Если вы хотите узнать, что означает строка записанная таким образом, то скопируйте её в одно из полей:</p>
+<ul>
+  <li style="text-align:justify;"><strong>\uXXXX</strong> — обратный слэш и u за которыми идут буквы и цифры (шестнадцатеричное число)</li>
+  <li style="text-align:justify;"><strong>\UXXXXXXXX</strong> — обратный слэш и большая U за которыми идут буквы и цифры (шестнадцатеричное число)</li>
+  <li style="text-align:justify;"><strong>&amp;#DDDD;</strong> - знак амперсанд и решётка, за которыми идут четыре цифры</li>
+  <li style="text-align:justify;"><strong>&amp;#xXXXX;</strong> - знак амперсанд, решётка и x, за которыми следует шестнадцатеричное число</li>
+  <li style="text-align:justify;"><strong>\xXX</strong> — обратный слэш и x, за которыми следует шестнадцатеричное число</li>
+  <li style="text-align:justify;"><strong>\OOO</strong> — обратный слэш и большая O, за которыми идёт число в восьмеричной системе счисления.</li>
+</ul>
+<p style="text-align:justify;">Такие строки используются в ситуациях, когда есть опасность, что написанные буквами национального алфавита строки исказятся (например, браузер неправильно поймёт кодировку веб-страницы):</p>
+<figure class="table">
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <p>1</p>
+          <p>2</p>
+          <p>3</p>
+        </td>
+        <td>
+          <p><code>&lt;script&gt;</code></p>
+          <p><code>&nbsp;&nbsp;&nbsp; alert ("\xD0\x9F\xD1\x80\xD0\xB8\xD0\xB2\xD0\xB5\xD1\x82")</code></p>
+          <p><code>&lt;/script&gt;</code></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</figure>
+<h2 style="text-align:justify;">Как конвертировать в экранированные последовательности<br>&nbsp;</h2>
+<p style="text-align:justify;">На этой же странице, как уже можно догадаться, можно конвертировать и в саму экранированную последовательность символов.</p>
+<p style="text-align:justify;">Если вы хотите углубить своё понимание строк, познакомиться с непечатанными символами, узнать что такое управляющие символы, узнать о других формах записи строк и о выполнении с ними логических операций, то рекомендуется для расширения кругозора статья «<a href="https://hackware.ru/?p=8604">ASCII и шестнадцатеричное представление строк. Побитовые операции со строками</a>».</p>
+<h2 style="text-align:justify;">Как изменить кодировку строки или документа без сторонних сервисов<br>&nbsp;</h2>
+<p style="text-align:justify;">Хотя показанный выше сервис НЕ отсылает введённые данные на сервер, а обходится исключительно с помощью JavaScript, запущенном в браузере пользователя, вполне возможно, что вы хотите изменить кодировку не используя сайты.</p>
+<p style="text-align:justify;"><a href="https://doublecmd.sourceforge.io/">Double Commander</a> при просмотре текстовых файлов (для этого выделите файл и нажмите <strong>F3</strong>) или при редактировании (<strong>F4</strong>) вы можете после открытия изменить кодировку, а также сохранить с другой кодировкой.</p>
+<figure class="image"><img src="https://hackware.ru/wp-content/uploads/2019/08/double-commander.jpg" alt="" srcset="https://hackware.ru/wp-content/uploads/2019/08/double-commander.jpg 577w, https://hackware.ru/wp-content/uploads/2019/08/double-commander-205x300.jpg 205w" sizes="100vw" width="577"></figure>
+<p style="text-align:justify;">Ещё один вариант для тех, у кого Linux, — использовать командную строку. С помощью неё можно узнать кодировку непонятной строки, а также изменить её на правильную. Для этого смотрите статью «<a href="https://zalinux.ru/?p=1060">Как определить кодировку файла или строки. Как конвертировать файлы в кодировку UTF-8 в Linux</a>».</p>
+<figure class="image"><img src="https://hackware.ru/wp-content/uploads/2019/08/encodings-symbols.jpg" alt="" srcset="https://hackware.ru/wp-content/uploads/2019/08/encodings-symbols.jpg 1600w, https://hackware.ru/wp-content/uploads/2019/08/encodings-symbols-300x205.jpg 300w, https://hackware.ru/wp-content/uploads/2019/08/encodings-symbols-768x524.jpg 768w, https://hackware.ru/wp-content/uploads/2019/08/encodings-symbols-1536x1048.jpg 1536w" sizes="100vw" width="1600"></figure>

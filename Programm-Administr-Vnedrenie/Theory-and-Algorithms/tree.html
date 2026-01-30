@@ -1,0 +1,140 @@
+<!--
+title: Обход дерева в глубину, обратный обход (от листьев)
+description: 
+published: true
+date: 2026-01-27T17:08:39.333Z
+tags: 
+editor: ckeditor
+dateCreated: 2026-01-27T17:04:54.410Z
+-->
+
+<figure class="image"><img src="https://l-stat.livejournal.net/img/userpics/userpic-user.png"></figure>
+<figure class="image"><img src="https://l-stat.livejournal.net/img/userinfo_v8.svg?v=17080&amp;v=906"></figure>
+<p><a href="https://ilyachalov.livejournal.com/"><strong>ilyachalov</strong></a>&nbsp;</p>
+<p><a href="https://ilyachalov.livejournal.com/177219.html#">Подписаться</a></p>
+<p>11 июня 2021, 00:06&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>0</p>
+<p><a href="https://ilyachalov.livejournal.com/177219.html?noscroll#comments">0</a></p>
+<p>0 Категории:&nbsp;</p>
+<ul>
+  <li><a href="https://www.livejournal.com/category/it/?utm_source=post">IT&nbsp;</a></li>
+  <li><a href="https://www.livejournal.com/category/obrazovanie/?utm_source=post">Образование&nbsp;</a></li>
+</ul>
+<h1><a href="https://ilyachalov.livejournal.com/177219.html">Обход дерева в глубину, обратный обход (от листьев)</a></h1>
+<p>Данный пост является продолжением серии постов:<br>1. <a href="https://ilyachalov.livejournal.com/175210.html">Учебник по JavaScript: структуры данных</a><br>2. <a href="https://ilyachalov.livejournal.com/175436.html">Учебник по JavaScript, структура данных «дерево»</a><br>3. <a href="https://ilyachalov.livejournal.com/176224.html">Что такое обход дерева</a><br>4. <a href="https://ilyachalov.livejournal.com/176395.html">Обход дерева в глубину без рекурсии</a><br>5. <a href="https://ilyachalov.livejournal.com/176678.html">Обход дерева в глубину с рекурсией</a><br>6. <a href="https://ilyachalov.livejournal.com/176925.html">Обход дерева в глубину, алгоритмы NLR из википедии</a><br><br>Продолжаю обзор статей об обходе дерева из википедии:<br><br><a href="https://ru.wikipedia.org/wiki/Обход_дерева">https://ru.wikipedia.org/wiki/Обход_дерева</a> (русскоязычная)<br><a href="https://en.wikipedia.org/wiki/Tree_traversal">https://en.wikipedia.org/wiki/Tree_traversal</a> (англоязычная)<br><br>Для визуализации обхода дерева в глубину в русскоязычной статье википедии приводится три иллюстрации. На этих иллюстрациях изображены бинарные (двоичные) деревья. Я долго не мог понять смысл этих иллюстраций, но в конце концов разобрался. Вот эти иллюстрации:<br><br>&nbsp;</p>
+<figure class="image"><img src="https://ic.pics.livejournal.com/ilyachalov/24714720/94379/94379_original.png" alt=""></figure>
+<figure class="image"><img src="https://ic.pics.livejournal.com/ilyachalov/24714720/94656/94656_original.png" alt=""></figure>
+<figure class="image"><img src="https://ic.pics.livejournal.com/ilyachalov/24714720/94845/94845_original.png" alt=""></figure>
+<p><br><i><strong>Алгоритмы обхода дерева в глубину NLR, LNR и LRN</strong></i><br>Про значение трехбуквенных названий алгоритмов обхода дерева в глубину было подробно рассказано в <a href="https://ilyachalov.livejournal.com/176925.html">предыдущем посте</a>.<br><br>Штриховой линией, начало которой отмечено маленьким черным квадратиком, а конец — стрелкой, обозначается цикл обхода узлов дерева. На каждой из этих трех иллюстраций обход узлов дерева производится с приоритетом обхода потомков слева направо, поэтому штриховая линия от корневого узла&nbsp;<strong>F</strong> сначала идёт против часовой стрелки.<br><br>Жирная черная точка на окружности каждого узла обозначает операцию обработки данных этого узла (латинская буква <strong>N</strong> в названии каждого алгоритма). На первой иллюстрации все эти точки изображены на левой стороне окружности каждого узла. На второй иллюстрации все эти точки изображены на нижней части окружности каждого узла. На третьей иллюстрации все эти точки изображены на правой стороне окружности каждого узла. Таким образом обозначается порядок выполнения операции <strong>N</strong> (обработка данных узла) относительно выполнения операций <strong>L</strong> (переход к левому потомку) и <strong>R</strong> (переход к правому потомку).<br><br>Как это понимать? Например, рассмотрим обход дерева (алгоритм <strong>NLR</strong>) на первой слева иллюстрации. Сначала штриховая линия проходит мимо жирной черной точки корневого узла <strong>F</strong>, то есть происходит обработка данных корневого узла <strong>F</strong>. Затем штриховая линия проходит по левой ветке от корневого узла <strong>F</strong>, то есть выполняется операция перехода к левому потомку узла <strong>F</strong>, этим потомком оказывается узел <strong>B</strong>. Штриховая линия проходит мимо жирной черной точки узла <strong>B</strong>, то есть выполняется операция обработки данных узла <strong>B</strong>. Далее штриховая линия отправляется к левому потомку узла <strong>B</strong>, которым оказывается узел <strong>A</strong>. И так далее.<br><br>Предположим, операция <strong>N</strong> (обработка данных узла, обозначенная на иллюстрациях жирной черной точкой на окружностях узлов) будет состоять в выводе данных узла на экран. Тогда узлы будут выведены на экран в следующем порядке (порядок вывода будет разным у каждого из алгоритмов обхода дерева в глубину):<br><strong>NLR</strong>: F, B, A, D, C, E, G, I, H
+  <strong>LNR</strong>: A, B, C, D, E, F, G, H, I
+  <strong>LRN</strong>: A, C, E, D, B, H, I, G, F
+  <br>* * *<br>В англоязычной версии статьи (см. ссылку выше) из википедии про обход дерева эти три иллюстрации объединены в одну иллюстрацию, на которой операции <strong>N</strong> (обработка данных узла) обозначены на окружностях узлов жирными точками трех разных цветов: красным (для алгоритма <strong>NLR</strong>), зеленым (для алгоритма <strong>LNR</strong>) и синим (для алгоритма <strong>LRN</strong>).<br><br>Если при обходе вышеприведенного бинарного (двоичного) дерева выполнять операцию <strong>N</strong> (обработка данных узла) трижды для каждого узла (перед переходом к потомкам, между переходом к левому потомку и переходом к правому потомку, после переходов к потомкам), то получим такой результат (обработкой данных узла будем считать простой вывод данных узла на экран):<br><strong>NLNRN</strong>: F, B, A, A, A, B, D, C, C, C, D, E, E, E, D, B, F, G, G, I, H, H, H, I, I, G, F
+  <br>* * *<br>Если принять при обходе узлов приоритет обхода потомков справа налево (в википедии эти алгоритмы не проиллюстрированы), то штриховая линия будет на иллюстрациях проходить так же, только у нее поменяются начало и конец (сначала штриховая линия будет выходить из корневого узла <strong>F</strong> по часовой стрелке). Жирную черную точку, обозначающую операцию <strong>N</strong> (обработка данных узла), при этом на первой иллюстрации (алгоритм <strong>NRL</strong>) надо будет изображать на правой стороне окружности каждого узла, для алгоритма <strong>RNL</strong> — на нижней части окружности каждого узла, а для алгоритма <strong>RLN</strong> — на левой стороне окружности каждого узла.<br><br>Вот как выглядят результаты работы шести трехбуквенных алгоритмов обхода вышеприведенного бинарного (двоичного) дерева в глубину:<br><br>Прямой, центрированный, обратный обходы (с приоритетом обхода потомков слева направо):<br><strong>NLR</strong>: F, B, A, D, C, E, G, I, H
+  <strong>LNR</strong>: A, B, C, D, E, F, G, H, I
+  <strong>LRN</strong>: A, C, E, D, B, H, I, G, F
+  Прямой, центрированный, обратный обходы (с приоритетом обхода потомков справа налево):<br><strong>NRL</strong>: F, G, I, H, B, D, E, C, A
+  <strong>RNL</strong>: I, H, G, F, E, D, C, B, A
+  <strong>RLN</strong>: H, I, G, E, C, D, A, B, F
+  <br>* * *<br>Меня тут заинтересовали алгоритмы <i>обратного</i> обхода дерева в глубину. Выше показано два таких алгоритма для бинарных (двоичных) деревьев: <strong>LRN</strong> и <strong>RLN</strong>. Мне они интересны тем, что в их случае выполнение операций <strong>N</strong> (обработка данных узла) для узлов начинается не с корневого узла и по нисходящей, а, наоборот, от концевых узлов (листьев) дерева и по восходящей к корневому узлу.<br><br>Для чего может понадобиться обратный обход? Предположим, есть данные, сохраненные в древовидной структуре данных. Требуется написать скрипт на языке JavaScript, который выводит эти данные на HTML-страницу с помощью элементов <code>ul</code> и <code>li</code>. Разрешается использовать только метод <code>append</code> (вставка заданного элемента в конец указанного элемента) для добавления готовых элементов на HTML-страницу.<br><br>Простой HTML-пример для дерева из трех узлов (корень и два листа):<br>&lt;ul&gt;
+  &nbsp;&lt;li&gt;Корень
+  &nbsp; &nbsp;&lt;ul&gt;
+  &nbsp; &nbsp; &nbsp;&lt;li&gt;Левый потомок&lt;/li&gt;
+  &nbsp; &nbsp; &nbsp;&lt;li&gt;Правый потомок&lt;/li&gt;
+  &nbsp; &nbsp;&lt;/ul&gt;
+  &nbsp;&lt;/li&gt;
+  &lt;/ul&gt;
+  В браузере это выглядит так:<br>&nbsp;
+</p>
+<ul>
+  <li>Корень<ul>
+      <li>Левый потомок</li>
+      <li>Правый потомок</li>
+    </ul>
+  </li>
+</ul>
+<p><br>Если использовать для обхода дерева в глубину прямой обход, то мы начнем с корня и будем вставлять его на HTML-страницу. Проблема в том, что элемент с корнем при вставке на HTML-страницу уже должен содержать ветви с потомками. Таким образом, удобнее начать обработку узлов дерева с листьев, вставить их в элемент родителя, а затем элемент родителя вставить на HTML-страницу (обратный обход).<br><br>* * *<br>Реализации обратного обхода дерева в глубину из статей википедии (ссылки в начале поста):<br><br>1) Обход бинарного (двоичного) дерева в глубину, <i><strong>рекурсивный</strong></i> алгоритм, LRN (обратный обход с приоритетом обхода потомков слева направо), реализация на псевдокоде, <i>цитата</i> (комментарии вставлены мной):<br><strong>postorder</strong>(node)
+  &nbsp;<strong>if</strong> (node = <strong>null</strong>)
+  &nbsp; &nbsp;<strong>return</strong>
+  &nbsp;postorder(node.left) &nbsp;// L
+  &nbsp;postorder(node.right) // R
+  &nbsp;visit(node) &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // N
+  <br>2) Обход бинарного (двоичного) дерева в глубину, <i><strong>итеративный</strong></i> алгоритм, LRN (обратный обход с приоритетом обхода потомков слева направо), реализация на псевдокоде, <i>цитата</i> (часть комментариев вставлена мной):<br><strong>iterativePostorder</strong>(node)
+  &nbsp;s ← <strong>empty stack</strong>
+  &nbsp;lastNodeVisited ← <strong>null</strong>
+  &nbsp;<strong>while</strong> (<strong>not</strong> s.isEmpty() <strong>or</strong> node ≠ <strong>null</strong>)
+  &nbsp; &nbsp;<strong>if</strong> (node ≠ <strong>null</strong>)
+  &nbsp; &nbsp; &nbsp;s.push(node)
+  &nbsp; &nbsp; &nbsp;node ← node.left &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// заглубление
+  &nbsp; &nbsp;<strong>else</strong>
+  &nbsp; &nbsp; &nbsp;peekNode ← s.peek()
+  &nbsp; &nbsp; &nbsp;// если правый потомок существует и обход пришёл из левого потомка, двигаемся вправо
+  &nbsp; &nbsp; &nbsp;<strong>if</strong> (peekNode.right ≠ <strong>null</strong> <strong>and</strong> lastNodeVisited ≠ peekNode.right)
+  &nbsp; &nbsp; &nbsp; &nbsp;node ← peekNode.right &nbsp; &nbsp; // переход по неисследованной ветке
+  &nbsp; &nbsp; &nbsp;<strong>else</strong>
+  &nbsp; &nbsp; &nbsp; &nbsp;visit(peekNode)
+  &nbsp; &nbsp; &nbsp; &nbsp;lastNodeVisited ← s.pop() // возвращение на уровень вверх
+  <br>При осмыслении этого итеративного алгоритма, по-моему, нужно обратить внимание на то, что, во-первых, попадание узлов в память (стек) и извлечение их оттуда происходит по-другому, не так, как в случае алгоритма NLR (при прямом обходе), рассмотренного в <a href="https://ilyachalov.livejournal.com/176925.html">прошлом посте</a>. История содержимого памяти (стека) во время работы программы в данном случае будет другой.<br><br>Во-вторых, на каждой итерации цикла <strong>while</strong> (цикл перебора узлов), как видно по веткам <strong>if</strong> и <strong>else</strong>, может произойти одно из трех событий — заглубление, переход по неисследованной ветке, возвращение на уровень вверх.<br><br>В целом алгоритм работает примерно так: сначала мы заглубляемся от корня дерева до листа с учетом приоритета обхода потомков (узлы по пути запоминаем в памяти (стеке), их данные не обрабатываем). Данные листа обрабатываются (функция <strong>visit</strong>). После этого возвращаемся на уровень вверх к ближайшей развилке. Переходим по неисследованной ветке (ветки исследуются с приоритетом слева направо) и снова заглубляемся до листа. Если у узла исследованы все ветки к потомкам, данные этого узла обрабатываются. И так далее, пока не будут обработаны данные всех узлов дерева. Переменная <strong>lastNodeVisited</strong> нужна, чтобы после возвращения на уровень вверх к развилке можно было с помощью этой переменной определить, какая ветка развилки исследована, а какая — нет.<br><br>Мои реализации обратного обхода дерева в глубину:<br><br>1) Обход дерева (не только двоичного) в глубину, <i><strong>рекурсивный</strong></i> алгоритм, RLN (обратный обход с приоритетом обхода потомков справа налево), реализация на языке JavaScript:<br>function traversal(tree) {
+  &nbsp; &nbsp;// если это не лист
+  &nbsp; &nbsp;if ( tree.refs ) {
+  &nbsp; &nbsp; &nbsp; &nbsp;// последовательно справа налево обходим ветви, ведущие к потомкам
+  &nbsp; &nbsp; &nbsp; &nbsp;for (let i = tree.refs.length - 1; i &gt;= 0; i--) {
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;traversal( tree.refs[i] ); // рекурсия
+  &nbsp; &nbsp; &nbsp; &nbsp;}
+  &nbsp; &nbsp;}
+  &nbsp; &nbsp;// ...обработка данных узла...
+  &nbsp; &nbsp;console.log(tree.data); // просто выводим в консоль
+  }
+  <br>2) Обход дерева (не только двоичного) в глубину, <i><strong>итеративный</strong></i> алгоритм, RLN (обратный обход с приоритетом обхода потомков справа налево), реализация на языке JavaScript:<br>function traversal(tree) {
+  &nbsp; &nbsp;let memory = []; &nbsp; &nbsp; // память (стек) (в начале пуста)
+  &nbsp; &nbsp;let cur_ref = tree; &nbsp;// текущая ссылка (в начале равна ссылке на корень дерева)
+  &nbsp; &nbsp;let lastNodeVisited; // последний обработанный узел на данный момент
+
+  &nbsp; &nbsp;// цикл перебора узлов
+  &nbsp; &nbsp;// &nbsp; &nbsp; закончить цикл, как только память (стек) опустеет
+  &nbsp; &nbsp;// &nbsp; &nbsp; и текущая ссылка перестанет указывать на узел дерева
+  &nbsp; &nbsp;while ( memory.length &gt; 0 || cur_ref ) {
+
+  &nbsp; &nbsp; &nbsp; &nbsp;// если текущая ссылка указывает на узел дерева, заглубляемся до листа (итерация заглубления)
+  &nbsp; &nbsp; &nbsp; &nbsp;if ( cur_ref ) {
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;memory.push( cur_ref ); // поместить ссылку в память (стек)
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// перейти к правому потомку
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( cur_ref.refs ) { cur_ref = cur_ref.refs[cur_ref.refs.length - 1]; // потомок есть
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} else { cur_ref = null; } &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; // потомка нет
+
+  &nbsp; &nbsp; &nbsp; &nbsp;// если текущая ссылка не указывает на узел дерева (узел на предыдущей
+  &nbsp; &nbsp; &nbsp; &nbsp;// итерации заглубления был листом или возвращаемся вверх)
+  &nbsp; &nbsp; &nbsp; &nbsp;} else {
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;let peekNode = memory[memory.length - 1]; // ссылка на узел в вершине стека
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// если узел на предыдущей итерации не был листом (возвращаемся вверх)
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( peekNode.refs ) {
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// ищем ветку, откуда вернулись
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;let i;
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;for (i = peekNode.refs.length - 1; i &gt;= 0; i--) {
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( peekNode.refs[i] == lastNodeVisited ) break;
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// если существует ветка левее, переходим по ней
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;if ( i &gt; 0 ) { cur_ref = peekNode.refs[i - 1]; }
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;else {
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// иначе (у узла на предыдущей итерации все потомки обработаны)
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;console.log(peekNode.data); &nbsp; &nbsp; // ...обработка данных узла... (вывод в консоль)
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;lastNodeVisited = memory.pop(); // убираем узел из памяти (стека) и запоминаем его
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;// если узел на предыдущей итерации был листом
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;} else {
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;console.log(peekNode.data); &nbsp; &nbsp; // ...обработка данных узла... (вывод в консоль)
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;lastNodeVisited = memory.pop(); // убираем узел из памяти (стека) и запоминаем его
+  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;}
+  &nbsp; &nbsp; &nbsp; &nbsp;}
+  &nbsp; &nbsp;}
+  }
+  <br>Дерево из десяти узлов для тестирования этого скрипта, заданное на языке JavaScript, можно взять в <a href="https://ilyachalov.livejournal.com/176395.html">одном</a> из предыдущих постов.<br><br>Вот оно на рисунке:<br>&nbsp;
+</p>
+<figure class="image"><img src="https://ic.pics.livejournal.com/ilyachalov/24714720/94997/94997_original.png" alt=""></figure>
+<p><br>В консоль должны быть выведены для этого дерева следующие последовательности данных (чисел) узлов при <i>прямом</i> обходе в глубину с приоритетом обхода потомков справа налево (NRL) и при <i>обратном</i> обходе в глубину с приоритетом обхода потомков справа налево (RLN):<br><strong>NRL</strong>: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+  <strong>RLN</strong>: 3, 4, 2, 6, 8, 9, 7, 10, 5, 1
+</p>
